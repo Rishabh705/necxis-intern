@@ -19,7 +19,7 @@ export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(loginWithCredentials, undefined);
 
   return (
-    <form action={dispatch} className="space-y-3 h-screen">
+    <form action={dispatch} className="space-y-3 min-h-screen flex-1 mt-20">
       <div className="flex-1 rounded-lg bg-gray-50 shadow-lg px-12 pb-4 pt-8 max-w-fit mx-auto">
         <h1 className={`${mulish.className} mb-3 text-2xl text-gray-600`}>
           Please log in to continue.

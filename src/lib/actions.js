@@ -41,22 +41,23 @@ export async function registerWithCredentials(prevState, formData) {
         if (user) {
             return "Email already exists"
         }
-
         const hashedPassword = await bcrypt.hash(password, 10)
-
+        
         //if user does not exist, create user
         const newUser = new User({ email: email, password: hashedPassword })
-
+        
         //save user
         await newUser.save()
+        console.log(newUser)
 
 
     } catch (err) {
+        console.log(err.message)
         return err.message
     }
     redirect('/login')
 }
-
+  
 export async function logout() {
     await signOut();
 }
@@ -117,6 +118,7 @@ export async function post(prevState, formData) {
         const newPost = new Post(newPostData);
 
         await newPost.save()
+        revalidatePath('/')
 
         return {
             success: true,
@@ -247,6 +249,7 @@ export const postComment = async (postId, formData) => {
             { $push: { comments: { author: user.email, comment: formData.get('comment') } } },
             { new: true }
         );
+        revalidatePath('/')
 
         return {
             success: true,
