@@ -19,7 +19,10 @@ export default async function Cards({ post, id,isFav, user }) {
             </Link>
             <div className="flex items-center gap-3 px-5 pb-2">
                 <Like id={id} isFav={isFav} user={user}/>
-                <PostComment postId={id}/>
+                {
+                    user?.email &&
+                    <PostComment postId={id}/>
+                }
             </div>
         </div>
     )

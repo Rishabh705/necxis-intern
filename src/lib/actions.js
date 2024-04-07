@@ -16,10 +16,13 @@ export async function loginWithCredentials(prevState, formData) {
     try {
         await signIn('credentials', formData)
     } catch (error) {
+        console.log("msg: ",error.message);
         if (error instanceof AuthError) {
             switch (error.type) {
                 case 'CredentialsSignin':
                     return 'Invalid credentials.';
+                case "CallbackRouteError":
+                    return 'User not found.';
                 default:
                     return 'Something went wrong.';
             }
